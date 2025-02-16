@@ -154,6 +154,9 @@ namespace Demo
             Console.WriteLine(result);
 
             #endregion
+
+            #region Casting Operators - Immediate Execution
+            #endregion
         }
     }
 }
