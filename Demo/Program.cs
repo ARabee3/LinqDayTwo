@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Text.RegularExpressions;
 using static Demo.ListGenerator;
 namespace Demo
 {
@@ -150,13 +151,149 @@ namespace Demo
             //var result = ProductList.Max(); // Exception because Product doesn't Implement ICompareable
             //var result = ProductList.Max(new ProductComparerUnitInStock()); // Implemented IComparer
             //var result = ProductList.Max(p => p.UnitsInStock); 
-            var result = ProductList.MaxBy(p => p.UnitPrice); // returns the product with the highest unit price
-            Console.WriteLine(result);
+            //var result = ProductList.MaxBy(p => p.UnitPrice); // returns the product with the highest unit price
+            //Console.WriteLine(result);
+            //List<string> Names = new List<string>() { "Ahmed", "Ali", "Omar", "Osama" };
+            //var result = Names.Aggregate((S01, S02) => $"{S01} , {S02}");
+            //Console.WriteLine(result);
 
             #endregion
 
             #region Casting Operators - Immediate Execution
+            // From Data type to another data type
+            //List<Product> list = ProductList.Where(P => P.UnitsInStock == 0).ToList();
+            //Product[] list = ProductList.Where(P => P.UnitsInStock == 0).ToArray();
+            //Dictionary<long, Product> list = ProductList.Where(P=> P.UnitsInStock == 0).ToDictionary(p=> p.ProductID );
+            //HashSet<Product> list = ProductList.Where(P=> P.UnitsInStock == 0).ToHashSet();
+
+            //foreach (var product in list) 
+            //{
+            //    Console.WriteLine(product);
+            //}
             #endregion
+
+            #region Generation Operators 
+            // Generates new sequence, the only way to call it as a class memeber method
+            // Range, Empty, Repeat
+            //var result = Enumerable.Range(1, 100);
+            //foreach (var item in result) 
+            //{
+            //    Console.WriteLine(item);
+            //}
+
+            //var r = Enumerable.Empty<Product>(); // generates empty sequence
+
+            //var result = Enumerable.Repeat(ProductList[0], 3);
+
+            //foreach (var item in result) 
+            //{
+            //    Console.WriteLine(item);
+            //}
+            #endregion
+
+            #region Set Operators - Union Family
+            // Union, Union All, Intersect, Except
+
+            //var seq01 = Enumerable.Range(1, 100);
+            //var seq02 = Enumerable.Range(50, 100);
+            //var result = seq01.Union(seq02); // works like maths union (without duplication)
+
+            //var result = seq01.Concat(seq02); // With Duplication
+            //result = result.Distinct(); // removes duplication
+
+            //var result = seq01.Intersect(seq02);
+
+            //var result = seq01.Except(seq02); // what's in the first sequence and not in the second sequence
+
+
+            //foreach (var item in result) 
+            //{
+            //    Console.Write($"{item} ");
+            //}
+            #endregion
+
+            #region Quantifier Operator
+            // Returns one value of boolean
+            // Any - All - SequenceEqual - Contains
+            //var seq01 = Enumerable.Range(1, 100);
+            //var seq02 = Enumerable.Range(50, 100);
+
+            //var result = seq01.Any(N => N % 2 == 0); // if there is at least one element matches condition => returns true
+
+            //var result = seq01.All(N => N <= 100); // returns true if ALL elements matches condition and if the sequence is empty
+
+            // SequenceEqual()
+            //var result = seq01.SequenceEqual(seq02); // must be equals
+
+            //var result = seq01.Contains(1);
+            //Console.WriteLine(result);
+            #endregion
+
+            #region Zip Operator
+            // Zipping Operator
+            // Zip (Isn't Supported in EFCore)
+
+            //List<string> Words = new List<string>() { "Ten" , "Twenty", "Thirty", "Fourty"};
+            //List<int> Numbers = new List<int>() { 10, 20, 30, 40, 50, 60 };
+            //var result = Words.Zip(Numbers,(W,N) => $"{N} --> {W}");
+            //foreach (var item in result)
+            //{
+            //    Console.WriteLine(item);
+            //}
+            #endregion
+
+            #region Grouping Operators
+            // Similar to groupby
+
+            //var result = ProductList.GroupBy(P => P.Category);
+
+            //var result = from P in ProductList
+            //             group P by P.Category;
+
+            //foreach (var item in result)
+            //{
+            //    Console.WriteLine($"{item.Key}");
+            //    foreach (var Product in item)
+            //    {
+            //        Console.WriteLine($".... {Product}");
+            //    }
+            //}
+            //var result = from P in ProductList
+            //             where P.UnitsInStock > 0
+            //             group P by P.Category
+            //             into Category
+            //             where Category.Count() > 5
+            //             select new {CategoryName = Category.Key, CountOfCategory = Category.Count()};
+            //foreach (var item in result) 
+            //{
+            //    Console.WriteLine(item);
+            //}
+
+            #endregion
+
+            #region Partitioning Operators
+            // Take, TakeLast, Skip, SkipLast, TakeWhile, SkipWhile => Used For Pagination
+            //var Result = ProductList.Where(P=> P.UnitsInStock == 0).Take(3);
+            //var Result = ProductList.Where(P=> P.UnitsInStock == 0).TakeLast(3);
+            //var Result = ProductList.Skip(5); // will skip the first 5
+            //var Result = ProductList.SkipLast(5); // will skip the last 5
+
+
+            //int[] Numbers = { 9, 6, 4, 1, 2, 3, 4, 5 };
+            //var Result = Numbers.TakeWhile(N => N % 3 == 0); // Takes The Elements as Long as the condition is true
+            //var Result = Numbers.SkipWhile(N => N % 3 == 0); // Skips The Elements as Long as the condition is true, when the condition become false it takes the rest elements int[] Numbers = {9,6,4,1,2,3,4,5};
+
+
+            //int[] Numbers = {5,4,1,3,9,6,7,2,0};
+            //var Result = Numbers.TakeWhile((N,I) => N > I); 
+            //var Result = Numbers.SkipWhile((N,I) => N > I); 
+
+            //foreach (var item in Result)    
+            //{
+            //    Console.WriteLine(item);
+            //}
+            #endregion
+
         }
     }
 }
